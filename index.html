@@ -1,0 +1,142 @@
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+        
+        <link rel="stylesheet"
+              href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+              integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX"
+              crossorigin="anonymous">
+        	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css">
+
+        <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js"></script>
+        
+        <title>Firebase IoT Demo</title>
+    </head>
+    <body>
+
+
+<div id="banner">
+  <div id="cloud-scroll">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">wApp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Chennai
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="https://www.accuweather.com/en/au/australia-weather">Accuweather</a>
+          <a class="dropdown-item" href="http://forecast.io/">Forecast</a>
+          
+        </div>
+      </li>
+    </ul>
+    <!--<form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+  </div>
+</nav>
+
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2012/12/29/21/11/sunrise-73074__480.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h2 class="card-title">Temperature</h2>
+                        <h1 id="temp" style="font-size: 55px;" class="card-title"></h1>
+                        <p class="card-text">Mostly Sunny till tomorrow.</p>
+                    </div>
+                </div> 
+            </div>  
+
+            <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2017/02/21/18/32/drops-2087006__480.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h2 class="card-title">Humidity</h2>
+                            <h1 id="hum" style="font-size: 55px;" class="card-title"><span>%</span></h1>
+                            <p class="card-text">Mildly Humid.</p>
+                        </div>
+                    </div> 
+                </div>  
+                <div class="col-sm-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="https://cdn.pixabay.com/photo/2018/04/16/12/59/face-3324569__480.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h2 class="card-title">Altitude</h2>
+                                <h1 id="alt" style="font-size: 55px;" class="card-title"><span>%</span></h1>
+                                <p class="card-text">Measured above the sea level.</p>
+                            </div>
+                        </div> 
+                    </div>  
+            
+                    <div class="col-sm-4">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="https://cdn.pixabay.com/photo/2012/10/26/00/40/cyclone-62957__480.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h2 class="card-title"><strong>Pressure</strong></h2>
+                                    <h1 id="prs" style="font-size: 55px;" class="card-title"><span>%</span></h1>
+                                    <p class="card-text">Expressed in Pascals.</p>
+                                </div>
+                            </div> 
+                        </div> 
+
+                        <div class="col-sm-4">
+                                <div class="card" style="width: 18rem;">
+                                    <img class="card-img-top" src="https://cdn.pixabay.com/photo/2016/07/28/08/50/sunbeam-1547273__480.jpg" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h2 class="card-title">Light Intensity</h2>
+                                        <h1 id="lit" style="font-size: 55px;" class="card-title"><span>%</span></h1>
+                                        <p class="card-text">Measured with LDR.</p>
+                                    </div>
+                                </div> 
+                            </div>  
+                            <div class="col-sm-4">
+                                    <div class="card" style="width: 18rem;">
+                                        <img class="card-img-top" src="https://cdn.pixabay.com/photo/2013/02/21/19/11/rain-84648__480.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h2 class="card-title">Rain</h2>
+                                            <h1 id="Rain" style="font-size: 55px;" class="card-title"><span>%</span></h1>
+                                            <p class="card-text">No rain expected.</p>
+                                        </div>
+                                    </div> 
+                                </div>  
+                         
+
+
+        </div>
+        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+        
+        <script src="index.js"></script>
+    </body>
+</html>
+
+
+
